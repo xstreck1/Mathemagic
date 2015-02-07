@@ -49,6 +49,7 @@ public class CharacterController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
+            transform.position += Vector3.up * 0.25f;
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE);
 			_jump = true;
         }
