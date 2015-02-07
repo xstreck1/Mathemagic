@@ -7,6 +7,8 @@ public class CastOnClick : MonoBehaviour
     int _spell = 0;
     List<Matrix4x4> spells = new List<Matrix4x4>();
 
+    bool _casting = false; ///< Set to true for the period of spell being active
+
     float _CAST_TIME = 1f;
 
     // Use this for initialization
@@ -32,9 +34,10 @@ public class CastOnClick : MonoBehaviour
     // 
     void OnMouseDown()
     {
-        Debug.Log("spell casted on " + this.name);
-
-        Cast(spells[_spell]);
+        if (!_casting) {
+            Debug.Log("spell casted on " + this.name);
+            Cast(spells[_spell]);
+        }
     }
 
     void Cast(Matrix4x4 spell)
@@ -44,6 +47,8 @@ public class CastOnClick : MonoBehaviour
 
     IEnumerator ApplyMatrix(Matrix4x4 spell)
     {
+        _casting = true;
+
         // Compute the angle of object
         float ang = Vector2.Angle(transform.up, Vector3.up);
         Vector3 cross = Vector3.Cross(transform.up, Vector3.up);
@@ -87,5 +92,7 @@ public class CastOnClick : MonoBehaviour
         transform.position = Vector3.Lerp(old_position, new_position, 1f);
         transform.localScale = Vector3.Lerp(old_scale, new_scale, 1f);
         transform.up = Vector3.Slerp(old_up, new_up, 1f);
+
+        _casting = false;
     }
 }
