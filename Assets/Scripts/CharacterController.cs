@@ -13,7 +13,9 @@ public class CharacterController : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, _dist_to_ground + 0.1f);
+        return Physics.Raycast (transform.position, -Vector3.up, _dist_to_ground + 0.1f) ||
+			Physics.Raycast (transform.position, new Vector3 (-0.05f, -1f, 0f), _dist_to_ground + 0.2f) ||
+				Physics.Raycast (transform.position, new Vector3 (0.05f, -1f, 0f), _dist_to_ground + 0.2f);
     }
 
     // Use this for initialization
