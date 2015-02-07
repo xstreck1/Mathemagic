@@ -25,12 +25,28 @@ public class SpellManager : MonoBehaviour {
 	
 	}
 
+    void SpellClicked(int spell_no)
+    {
+        Debug.Log("spell " + spell_no);
+        if (_active_spell == -1)
+        {
+            _active_spell = spell_no;
+        } else
+        {
+            spells[spell_no] *= spells[_active_spell];
+            spells.RemoveAt(_active_spell);
+            _active_spell = -1;
+            DisplaySpells();
+        }
+    }
+
     void DisplaySpells()
     {
         foreach (GameObject button in buttons)
         {
             GameObject.Destroy(button);
         }
+        buttons.Clear();
 
         foreach (Matrix4x4 spell in spells)
         {
@@ -41,7 +57,7 @@ public class SpellManager : MonoBehaviour {
             buttons.Add(button_transform.gameObject);
 
             Button button = button_transform.GetComponent<Button>();
-            button.onClick.AddListener(() => { _active_spell = button_no; Debug.Log("Active spell " + button_no); });
+            button.onClick.AddListener(() => { SpellClicked( button_no); });
 
             button_transform.GetComponentInChildren<Text>().text = GetSpellText(spell);
         }
@@ -63,6 +79,9 @@ public class SpellManager : MonoBehaviour {
 
     public Matrix4x4 getSpell()
     {
-        return spells[_active_spell];
+        if (_active_spell == -1)
+            return Matrix4x4.identity;
+        else
+            return spells[_active_spell];
     }
 }

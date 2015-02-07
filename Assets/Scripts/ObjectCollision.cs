@@ -30,7 +30,6 @@ public class ObjectCollision : MonoBehaviour
         {
             float progress = time / _SMASH_TIME;
             transform.localScale = Vector3.Lerp(my_scale, Vector3.zero, progress);
-            Debug.Log("progress " + progress);
             yield return null;
         }
 
