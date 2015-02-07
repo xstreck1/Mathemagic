@@ -68,6 +68,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
@@ -294,6 +295,76 @@ ModelImporter:
       rotation: {x: -.5, y: .5, z: -.5, w: .5}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
+    - name: spine_bind
+      position: {x: -.206704512, y: -2.29488109e-17, z: 7.64348965e-33}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: torso_bind
+      position: {x: -.160937816, y: -3.57353738e-17, z: 5.36030639e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: neck_bind
+      position: {x: -.282357872, y: -6.2696042e-17, z: 9.40440564e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: head_bind
+      position: {x: -.0916517973, y: -2.03507871e-17, z: 3.05261807e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: L_clavical_bind
+      position: {x: -.190357849, y: -4.78190498e-17, z: -.049999997}
+      rotation: {x: 3.92523141e-17, y: -.707106829, z: 3.92523141e-17, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: L_shoulder_rot_bind
+      position: {x: -.245562777, y: -2.72629449e-17, z: 0}
+      rotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: L_upArm_bind
+      position: {x: 3.5527136e-17, y: 0, z: 4.73316533e-32}
+      rotation: {x: -.703770399, y: -.0187109932, z: -.018548416, w: .709938884}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: L_loArm_bind
+      position: {x: -.348468661, y: -5.77315952e-17, z: -5.65032862e-16}
+      rotation: {x: .00435971981, y: .00017694605, z: .0405527912, w: .99916786}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: L_hand_bind
+      position: {x: -.333973467, y: -1.66533454e-16, z: -3.40131788e-18}
+      rotation: {x: .710062206, y: -.0132199433, z: -.0192473643, w: .703751683}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: R_clavical_bind
+      position: {x: -.190360814, y: -2.56148769e-17, z: .049999997}
+      rotation: {x: .707106829, y: 2.00307066e-16, z: .707106829, w: -2.00307066e-16}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: R_shoulder_rot_bind
+      position: {x: .245562986, y: -8.17888396e-17, z: 8.52651264e-16}
+      rotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: R_upArm_bind
+      position: {x: -0, y: 0, z: -1.57772178e-32}
+      rotation: {x: .709938884, y: .018548416, z: -.0187109932, w: .703770399}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: R_loArm_bind
+      position: {x: .34846884, y: -1.81662063e-08, z: -2.84217088e-16}
+      rotation: {x: .00435971981, y: .00017694605, z: .0405527912, w: .99916786}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: R_hand_bind
+      position: {x: .333973467, y: 2.53236152e-08, z: 2.84217088e-16}
+      rotation: {x: -.0130514773, y: -.70389384, z: .7099213, w: .0193619952}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
     - name: L_upLeg_bind
       position: {x: .0187817849, y: -2.21939507e-17, z: -.109343566}
       rotation: {x: .0534625351, y: .998569846, z: 3.58466123e-09, w: -1.91919564e-10}
@@ -332,76 +403,6 @@ ModelImporter:
     - name: R_toe_bind
       position: {x: .153331652, y: 3.00417611e-07, z: -7.1054272e-17}
       rotation: {x: -.238548547, y: .97113061, z: 1.74307901e-09, w: -4.28169944e-10}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: spine_bind
-      position: {x: -.206704512, y: -2.29488109e-17, z: 7.64348965e-33}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: torso_bind
-      position: {x: -.160937816, y: -3.57353738e-17, z: 5.36030639e-17}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: L_clavical_bind
-      position: {x: -.190357849, y: -4.78190498e-17, z: -.049999997}
-      rotation: {x: 3.92523141e-17, y: -.707106829, z: 3.92523141e-17, w: .707106829}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: L_shoulder_rot_bind
-      position: {x: -.245562777, y: -2.72629449e-17, z: 0}
-      rotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: L_upArm_bind
-      position: {x: 3.5527136e-17, y: 0, z: 4.73316533e-32}
-      rotation: {x: -.703770399, y: -.0187109932, z: -.018548416, w: .709938884}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: L_loArm_bind
-      position: {x: -.348468661, y: -5.77315952e-17, z: -5.65032862e-16}
-      rotation: {x: .00435971981, y: .00017694605, z: .0405527912, w: .99916786}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: L_hand_bind
-      position: {x: -.333973467, y: -1.66533454e-16, z: -3.40131788e-18}
-      rotation: {x: .710062206, y: -.0132199433, z: -.0192473643, w: .703751683}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: neck_bind
-      position: {x: -.282357872, y: -6.2696042e-17, z: 9.40440564e-17}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: head_bind
-      position: {x: -.0916517973, y: -2.03507871e-17, z: 3.05261807e-17}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: R_clavical_bind
-      position: {x: -.190360814, y: -2.56148769e-17, z: .049999997}
-      rotation: {x: .707106829, y: 2.00307066e-16, z: .707106829, w: -2.00307066e-16}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: R_shoulder_rot_bind
-      position: {x: .245562986, y: -8.17888396e-17, z: 8.52651264e-16}
-      rotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: R_upArm_bind
-      position: {x: -0, y: 0, z: -1.57772178e-32}
-      rotation: {x: .709938884, y: .018548416, z: -.0187109932, w: .703770399}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: R_loArm_bind
-      position: {x: .34846884, y: -1.81662063e-08, z: -2.84217088e-16}
-      rotation: {x: .00435971981, y: .00017694605, z: .0405527912, w: .99916786}
-      scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: R_hand_bind
-      position: {x: .333973467, y: 2.53236152e-08, z: 2.84217088e-16}
-      rotation: {x: -.0130514773, y: -.70389384, z: .7099213, w: .0193619952}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     armTwist: .5

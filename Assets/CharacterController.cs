@@ -7,6 +7,9 @@ public class CharacterController : MonoBehaviour
     public float _MOVE_FORCE = 750f;
     public float _MAX_SPEED = 5f;
     public float _JUMP_FORCE = 750f;
+	private bool _jump = false;
+
+	private Locomotion2D locomotion;
 
     bool IsGrounded()
     {
@@ -16,6 +19,7 @@ public class CharacterController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		locomotion = new Locomotion2D (this.GetComponent<Animator> ());
     }
 
     // Update is called once per frame
@@ -38,19 +42,26 @@ public class CharacterController : MonoBehaviour
         }
         else if (rigidbody.velocity.x != 0f) // Apply breaking in the opposing direction of movement (slow down)
         {
-            float old_velocity = rigidbody.velocity.x;
-            rigidbody.AddForce((rigidbody.velocity.x > 0 ? Vector3.left : Vector3.right) * _MOVE_FORCE * Time.deltaTime);
-            if (Mathf.Sign(old_velocity) != Mathf.Sign(rigidbody.velocity.x))
-            {
-                Vector3 new_vleocity = rigidbody.velocity;
-                new_vleocity.x = 0f;
-                rigidbody.velocity = new_vleocity;
-            }
+			Vector3 oppositeForce = new Vector3(-rigidbody.velocity.x, 0f, 0f);
+			rigidbody.AddForce(oppositeForce * _MOVE_FORCE * 0.5f * Time.deltaTime);
         }
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE);
-
+			_jump = true;
         }
+		if (_jump) {
+			locomotion.Update (true, rigidbody.velocity.magnitude);
+			_jump = false;
+		} else {
+			locomotion.Update (false, rigidbody.velocity.magnitude);
+		}
+		if (rigidbody.velocity.x >= 0f && !Input.GetKey (KeyCode.A)) {
+			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
+		} else if (Input.GetKey (KeyCode.A) || rigidbody.velocity.x <= 0.2f) {
+			transform.rotation = Quaternion.AngleAxis (-90f, Vector3.up);
+		} else {
+			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
+		}
     }
 }
