@@ -36,7 +36,7 @@ public class CharacterController : MonoBehaviour
                 rigidbody.AddForce(Vector3.left * _MOVE_FORCE * Time.deltaTime);
             }
         }
-        else // Apply breaking in the opposing direction of movement (slow down)
+        else if (rigidbody.velocity.x != 0f) // Apply breaking in the opposing direction of movement (slow down)
         {
             float old_velocity = rigidbody.velocity.x;
             rigidbody.AddForce((rigidbody.velocity.x > 0 ? Vector3.left : Vector3.right) * _MOVE_FORCE * Time.deltaTime);
@@ -51,6 +51,12 @@ public class CharacterController : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE);
 
+        }
+
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            Time.timeScale = -1f;
         }
     }
 }

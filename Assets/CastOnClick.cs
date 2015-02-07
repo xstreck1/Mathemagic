@@ -17,8 +17,8 @@ public class CastOnClick : MonoBehaviour
         _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
         _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
         _initial_postion = transform.position;
-        _translate_mat = Matrix4x4.TRS(new Vector3(2f, 0f, 0f), Quaternion.identity, Vector3.one);
-        _rotate_mat = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 30f), Vector3.one);
+        _translate_mat = Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one);
+        _rotate_mat = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one);
     }
 
     // Update is called once per frame
@@ -35,8 +35,9 @@ public class CastOnClick : MonoBehaviour
         matrix = _move_from_center * matrix * _move_to_center;
         transform.position = matrix.MultiplyPoint(transform.position);
         transform.up = (matrix.MultiplyVector(transform.up));
-
-    }
+        _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
+        _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
+   } 
 
     // 
     void OnMouseDown()
@@ -45,7 +46,7 @@ public class CastOnClick : MonoBehaviour
 
         if (_spell)
         {
-            updateCoordinates(_rotate_mat);
+            updateCoordinates(_rotate_mat * _translate_mat);
             // updateCoordinates(_translate_mat);
         }
 
