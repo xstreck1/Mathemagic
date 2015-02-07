@@ -15,8 +15,6 @@ public class SpellManager : MonoBehaviour {
         _spells.Add(Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one));
         _spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one));
         _spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 2));
-        _spells.Add(_spells[1] * _spells[0]);
-        _spells.Add(_spells[0] * _spells[1]);
         DisplaySpells();
     }
 	
@@ -77,7 +75,7 @@ public class SpellManager : MonoBehaviour {
         return result.Remove(result.Length - 1);
     }
 
-    public Matrix4x4 getSpell()
+    public Matrix4x4 GetSpell()
     {
         Matrix4x4 spell;
         if (_active_spell == -1)
@@ -91,5 +89,11 @@ public class SpellManager : MonoBehaviour {
             DisplaySpells();
         }
         return spell;
+    }
+
+    public void AddSpell(Matrix4x4 spell)
+    {
+        _spells.Add(spell);
+        DisplaySpells();
     }
 }

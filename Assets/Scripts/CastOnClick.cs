@@ -6,14 +6,14 @@ public class CastOnClick : MonoBehaviour
     bool _casting = false; ///< Set to true for the period of spell being active
     float _CAST_TIME = 1f;
 
-    ObjectCollision object_collision;
-    SpellManager spell_manager;
+    ObjectCollision _object_collision;
+    SpellManager _spell_manager;
 
     // Use this for initialization
     void Start()
     {
-        spell_manager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
-        object_collision = GetComponent<ObjectCollision>();
+        _spell_manager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        _object_collision = GetComponent<ObjectCollision>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class CastOnClick : MonoBehaviour
     void OnMouseDown()
     {
         if (!_casting) {
-            Cast(spell_manager.getSpell());
+            Cast(_spell_manager.GetSpell());
             Debug.Log("spell casted on " + this.name);
         }
     }
@@ -87,7 +87,7 @@ public class CastOnClick : MonoBehaviour
         Vector3 new_scale = new Vector3(Vector3.Distance(new_position, scale_pos_x), Vector3.Distance(new_position, scale_pos_y), Vector3.Distance(new_position, scale_pos_z));
 
         // Lerp in the coroutine for the CAST TIME
-        for (float time = 0; time < _CAST_TIME && !object_collision.isDestroying(); time += Time.deltaTime)
+        for (float time = 0; time < _CAST_TIME && !_object_collision.isDestroying(); time += Time.deltaTime)
         {
             float progress = time / _CAST_TIME;
             transform.position = Vector3.Lerp(old_position, new_position, progress);
@@ -97,7 +97,7 @@ public class CastOnClick : MonoBehaviour
         }
 
         // Adjust after the coroutine has finished
-        if (!object_collision.isDestroying())
+        if (!_object_collision.isDestroying())
         {
             transform.position = Vector3.Lerp(old_position, new_position, 1f);
             transform.localScale = Vector3.Lerp(old_scale, new_scale, 1f);
