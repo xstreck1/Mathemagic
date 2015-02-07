@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CastOnClick : MonoBehaviour
 {
-    bool _spell = true;
-    Vector3 _initial_postion;
+    int _spell = 0;
+    int _SPELL_COUNT = 3;
 
     Matrix4x4 _move_to_center;
     Matrix4x4 _move_from_center;
+    List<Matrix4x4> spells = new List<Matrix4x4>();
     Matrix4x4 _translate_mat;
     Matrix4x4 _rotate_mat;
-
-    Matrix4x4 _current_spell;
+    Matrix4x4 _scale_mat;
 
     float _CAST_TIME = 1f;
 
@@ -20,9 +21,9 @@ public class CastOnClick : MonoBehaviour
     {
         _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
         _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
-        _initial_postion = transform.position;
-        _translate_mat = Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one);
-        _rotate_mat = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one);
+        spells.Add(Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one));
+        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one));
+        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 2));
     }
 
     // Update is called once per frame
@@ -30,8 +31,8 @@ public class CastOnClick : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Spell switch.");
-            _spell = !_spell;
+            _spell = (_spell + 1) % _SPELL_COUNT;
+            Debug.Log("Using spell " + _spell);
         }
     }
 
@@ -40,38 +41,44 @@ public class CastOnClick : MonoBehaviour
     {
         Debug.Log("spell casted on " + this.name);
 
-        if (_spell)
-        {
-            Cast(_translate_mat);
-            // updateCoordinates(_translate_mat);
-        }
-
-        else
-        {
-            Cast(_translate_mat * _rotate_mat);
-        }
+        Cast(spells[_spell]);
     }
 
     void Cast(Matrix4x4 spell)
     {
-        _current_spell = spell;
-        StartCoroutine("ApplyMatrix");
+        StartCoroutine(ApplyMatrix(spell));
     }
 
-    IEnumerator ApplyMatrix()
+    IEnumerator ApplyMatrix(Matrix4x4 spell)
     {
-        _current_spell = _move_from_center * _current_spell * _move_to_center;
-        Vector3 _new_position = _current_spell.MultiplyPoint(transform.position);
-        Vector3 _new_up = _current_spell.MultiplyVector(transform.up);
-        Vector3 _old_position = transform.position;
-        Vector3 _old_up = transform.up;
+        spell = _move_from_center * spell * _move_to_center;
+        Vector3 old_up = transform.up;
+        Vector3 new_up = spell.MultiplyVector(old_up);
+
+        Vector3 old_position = transform.position;
+        Vector4 affine_pos = old_position;
+        affine_pos.w = 1;
+        Vector4 new_affine_pos = spell * (affine_pos);
+        Vector3 new_position = (new_affine_pos) / new_affine_pos.w;
+
+        Vector3 old_scale = transform.localScale;
+        Vector3 scale_pos_x = spell.MultiplyPoint(old_position + new Vector3(old_scale.x, 0, 0));
+        Vector3 scale_pos_y = spell.MultiplyPoint(old_position + new Vector3(0, old_scale.y, 0));
+        Vector3 scale_pos_z = spell.MultiplyPoint(old_position + new Vector3(0, 0, old_scale.z));
+        Vector3 new_scale = new Vector3(Vector3.Distance(new_position, scale_pos_x), Vector3.Distance(new_position, scale_pos_y), Vector3.Distance(new_position, scale_pos_z));
 
         for (float time = 0; time < _CAST_TIME; time += Time.deltaTime)
         {
-            transform.position = Vector3.Lerp(_old_position, _new_position, time / _CAST_TIME);
-            transform.up = Vector3.Slerp(_old_up, _new_up, time / _CAST_TIME);
+            float progress = time / _CAST_TIME;
+            transform.position = Vector3.Lerp(old_position, new_position, progress);
+            transform.localScale = Vector3.Lerp(old_scale, new_scale, progress);
+            transform.up = Vector3.Slerp(old_up, new_up, progress);
             yield return null;
         }
+
+        transform.position = Vector3.Lerp(old_position, new_position, 1f);
+        transform.localScale = Vector3.Lerp(old_scale, new_scale, 1f);
+        transform.up = Vector3.Slerp(old_up, new_up, 1f);
 
         _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
         _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
