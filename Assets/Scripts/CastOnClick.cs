@@ -7,10 +7,12 @@ public class CastOnClick : MonoBehaviour
     float _CAST_TIME = 1f;
 
     ObjectCollision object_collision;
+    SpellManager spell_manager;
 
     // Use this for initialization
     void Start()
     {
+        spell_manager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
         object_collision = GetComponent<ObjectCollision>();
     }
 
@@ -23,6 +25,7 @@ public class CastOnClick : MonoBehaviour
     void OnMouseDown()
     {
         if (!_casting) {
+            Cast(spell_manager.getSpell());
             Debug.Log("spell casted on " + this.name);
         }
     }
