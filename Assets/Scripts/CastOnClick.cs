@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class CastOnClick : MonoBehaviour
 {
-    int _spell = 0;
-    List<Matrix4x4> spells = new List<Matrix4x4>();
-
     bool _casting = false; ///< Set to true for the period of spell being active
     float _CAST_TIME = 1f;
 
@@ -16,22 +12,11 @@ public class CastOnClick : MonoBehaviour
     void Start()
     {
         object_collision = GetComponent<ObjectCollision>();
-
-        spells.Add(Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one));
-        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one));
-        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 2));
-        spells.Add(spells[1] * spells[0]);
-        spells.Add(spells[0] * spells[1]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            _spell = (_spell + 1) % spells.Count;
-            Debug.Log("Using spell " + _spell);
-        }
     }
 
     // 
@@ -39,8 +24,12 @@ public class CastOnClick : MonoBehaviour
     {
         if (!_casting) {
             Debug.Log("spell casted on " + this.name);
-            Cast(spells[_spell]);
         }
+    }
+
+    public bool IsCasting()
+    {
+        return _casting;
     }
 
     void Cast(Matrix4x4 spell)
