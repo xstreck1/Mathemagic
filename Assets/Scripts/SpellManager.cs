@@ -28,12 +28,22 @@ public class SpellManager : MonoBehaviour {
         Debug.Log("spell " + spell_no);
         if (_active_spell == -1)
         {
+            _buttons[spell_no].GetComponent<Button>().image.color = Color.black;
             _active_spell = spell_no;
+        } else if (_active_spell == spell_no)
+        {
+            _active_spell = -1;
+            _buttons[spell_no].GetComponent<Button>().image.color = Color.white;
         } else
         {
             _spells[spell_no] *= _spells[_active_spell];
             _spells.RemoveAt(_active_spell);
-            _active_spell = -1;
+
+            if (_active_spell > spell_no)
+                _active_spell = spell_no;
+            else // After removal of a spell that preceded the current one
+                _active_spell = spell_no - 1;
+
             DisplaySpells();
         }
     }
@@ -56,6 +66,10 @@ public class SpellManager : MonoBehaviour {
 
             Button button = button_transform.GetComponent<Button>();
             button.onClick.AddListener(() => { SpellClicked( button_no); });
+            button.name = "Spell button " + button_no;
+
+            if (_active_spell == button_no)
+                _buttons[button_no].GetComponent<Button>().image.color = Color.black;
 
             button_transform.GetComponentInChildren<Text>().text = GetSpellText(spell);
         }
