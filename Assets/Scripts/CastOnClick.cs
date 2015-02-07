@@ -6,9 +6,6 @@ public class CastOnClick : MonoBehaviour
     bool _casting = false; ///< Set to true for the period of spell being active
     float _CAST_TIME = 1f;
 
-	bool _hasPlayer = false;
-	Rigidbody _player;
-
     ObjectCollision _object_collision;
     SpellManager _spell_manager;
 
@@ -53,25 +50,6 @@ public class CastOnClick : MonoBehaviour
         return angle;
     }
 
-	void OnCollisionEnter(Collision collision)
-	{
-		CharacterController other = collision.gameObject.GetComponent<CharacterController>();
-		if (other != null)
-		{
-			_hasPlayer = true;
-			_player = other.GetComponent<Rigidbody>();
-		}
-	}
-	void OnCollisionExit(Collision collisionInfo) {
-		CharacterController other = collisionInfo.gameObject.GetComponent<CharacterController>();
-		if (other != null)
-		{
-			_hasPlayer = false;
-			_player = null;
-		}
-	}
-
-
     // Compute the matrix (move to the origin and reset rotation before)
     Matrix4x4 putToOrigin(Matrix4x4 spell)
     {
@@ -93,14 +71,9 @@ public class CastOnClick : MonoBehaviour
 
         spell = putToOrigin(spell);
 
-		bool translatePlayer = true;
-
         // Apply rotation
         Vector3 old_up = transform.up;
         Vector3 new_up = spell.MultiplyVector(old_up);
-		if (old_up != new_up) {
-			translatePlayer = false;
-		}
 
         // Apply translation
         Vector3 old_position = transform.position;
@@ -113,16 +86,6 @@ public class CastOnClick : MonoBehaviour
         Vector3 scale_pos_z = spell.MultiplyPoint(old_position + new Vector3(0, 0, old_scale.z));
         Vector3 new_scale = new Vector3(Vector3.Distance(new_position, scale_pos_x), Vector3.Distance(new_position, scale_pos_y), Vector3.Distance(new_position, scale_pos_z));
 
-		if (old_scale != new_scale) {
-			translatePlayer = false;
-		}
-
-		Vector3 new_player_position = Vector3.zero;
-		Vector3 old_player_position = _player.transform.position;
-		if (_hasPlayer && translatePlayer) {
-			_player.isKinematic = true;
-			new_player_position = spell.MultiplyPoint(old_player_position);
-		}
         // Lerp in the coroutine for the CAST TIME
         for (float time = 0; time < _CAST_TIME && !_object_collision.isDestroying(); time += Time.deltaTime)
         {
@@ -130,9 +93,6 @@ public class CastOnClick : MonoBehaviour
             transform.position = Vector3.Lerp(old_position, new_position, progress);
             transform.localScale = Vector3.Lerp(old_scale, new_scale, progress);
             transform.up = Vector3.Slerp(old_up, new_up, progress);
-			if (_hasPlayer && translatePlayer) {
-				_player.transform.position = Vector3.Lerp(old_player_position, new_player_position, progress);
-			}
             yield return null;
         }
 
@@ -142,13 +102,7 @@ public class CastOnClick : MonoBehaviour
             transform.position = Vector3.Lerp(old_position, new_position, 1f);
             transform.localScale = Vector3.Lerp(old_scale, new_scale, 1f);
             transform.up = Vector3.Slerp(old_up, new_up, 1f);
-			if (_hasPlayer && translatePlayer) {
-				_player.transform.position = Vector3.Lerp(old_player_position, new_player_position, 1f);
-				_player.rigidbody.isKinematic = false;
-			}
         }
-
-
 
         Destroy(rigidbody);
         _casting = false;
