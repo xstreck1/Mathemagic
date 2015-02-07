@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
-
+using System.Linq;
 
 public static class MyExtensions
 {
-    /*public static int WordCount(this String str)
+    public static Matrix4x4 multiply(this Matrix4x4 mat, float scalar)
     {
-        return str.Split(new char[] { ' ', '.', '?' },
-                         StringSplitOptions.RemoveEmptyEntries).Length;
-    }*/
+        Matrix4x4 result = mat;
+        foreach (int x in Enumerable.Range(0,4))
+        {
+            foreach (int y in Enumerable.Range(0, 4))
+            {
+                result[x, y] = mat[x, y] * scalar;
+            }
+        }
+        return result;
+    }
 }

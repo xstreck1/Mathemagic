@@ -13,7 +13,7 @@ public class CastOnClick : MonoBehaviour
 
     Matrix4x4 _current_spell;
 
-    int _STEP_COUNT = 10;
+    float _CAST_TIME = 1f;
 
     // Use this for initialization
     void Start()
@@ -35,14 +35,6 @@ public class CastOnClick : MonoBehaviour
         }
     }
 
-    void updateCoordinates(Matrix4x4 matrix)  {
-        matrix = _move_from_center * matrix * _move_to_center;
-        transform.position = matrix.MultiplyPoint(transform.position);
-        transform.up = (matrix.MultiplyVector(transform.up));
-        _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
-        _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
-   } 
-
     // 
     void OnMouseDown()
     {
@@ -50,30 +42,38 @@ public class CastOnClick : MonoBehaviour
 
         if (_spell)
         {
-            updateCoordinates(_rotate_mat * _translate_mat);
+            Cast(_translate_mat);
             // updateCoordinates(_translate_mat);
         }
 
         else
         {
-            updateCoordinates(_translate_mat * _rotate_mat);
+            Cast(_translate_mat * _rotate_mat);
         }
     }
 
     void Cast(Matrix4x4 spell)
     {
-        // _current_spell = spell * (1f / _STEP_COUNT);
+        _current_spell = spell;
         StartCoroutine("ApplyMatrix");
     }
 
     IEnumerator ApplyMatrix()
     {
-        for (int step = 0; step < _STEP_COUNT; step++)
+        _current_spell = _move_from_center * _current_spell * _move_to_center;
+        Vector3 _new_position = _current_spell.MultiplyPoint(transform.position);
+        Vector3 _new_up = _current_spell.MultiplyVector(transform.up);
+        Vector3 _old_position = transform.position;
+        Vector3 _old_up = transform.up;
+
+        for (float time = 0; time < _CAST_TIME; time += Time.deltaTime)
         {
-            /*Color c = renderer.material.color;
-            c.a = f;
-            renderer.material.color = c; */
-            yield return new WaitForSeconds(.1f);
+            transform.position = Vector3.Lerp(_old_position, _new_position, time / _CAST_TIME);
+            transform.up = Vector3.Slerp(_old_up, _new_up, time / _CAST_TIME);
+            yield return null;
         }
+
+        _move_to_center = Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
+        _move_from_center = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one);
     }
 }
