@@ -52,11 +52,5 @@ public class CharacterController : MonoBehaviour
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE);
 
         }
-
-
-        if (Input.GetKey(KeyCode.Z))
-        {
-            Time.timeScale = -1f;
-        }
     }
 }

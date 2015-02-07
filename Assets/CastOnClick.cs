@@ -11,6 +11,10 @@ public class CastOnClick : MonoBehaviour
     Matrix4x4 _translate_mat;
     Matrix4x4 _rotate_mat;
 
+    Matrix4x4 _current_spell;
+
+    int _STEP_COUNT = 10;
+
     // Use this for initialization
     void Start()
     {
@@ -53,6 +57,23 @@ public class CastOnClick : MonoBehaviour
         else
         {
             updateCoordinates(_translate_mat * _rotate_mat);
+        }
+    }
+
+    void Cast(Matrix4x4 spell)
+    {
+        // _current_spell = spell * (1f / _STEP_COUNT);
+        StartCoroutine("ApplyMatrix");
+    }
+
+    IEnumerator ApplyMatrix()
+    {
+        for (int step = 0; step < _STEP_COUNT; step++)
+        {
+            /*Color c = renderer.material.color;
+            c.a = f;
+            renderer.material.color = c; */
+            yield return new WaitForSeconds(.1f);
         }
     }
 }
