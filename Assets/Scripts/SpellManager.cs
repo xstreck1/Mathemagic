@@ -7,16 +7,16 @@ using System.Linq;
 public class SpellManager : MonoBehaviour {
     public Transform _spell_button_prefab;
     int _active_spell = -1;
-    List<Matrix4x4> spells = new List<Matrix4x4>();
-    List<GameObject> buttons = new List<GameObject>(); 
+    List<Matrix4x4> _spells = new List<Matrix4x4>();
+    List<GameObject> _buttons = new List<GameObject>(); 
 
     // Use this for initialization
     void Start () {
-        spells.Add(Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one));
-        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one));
-        spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 2));
-        spells.Add(spells[1] * spells[0]);
-        spells.Add(spells[0] * spells[1]);
+        _spells.Add(Matrix4x4.TRS(new Vector3(0f, 2f, 0f), Quaternion.identity, Vector3.one));
+        _spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0f, 0f, 45f), Vector3.one));
+        _spells.Add(Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * 2));
+        _spells.Add(_spells[1] * _spells[0]);
+        _spells.Add(_spells[0] * _spells[1]);
         DisplaySpells();
     }
 	
@@ -33,8 +33,8 @@ public class SpellManager : MonoBehaviour {
             _active_spell = spell_no;
         } else
         {
-            spells[spell_no] *= spells[_active_spell];
-            spells.RemoveAt(_active_spell);
+            _spells[spell_no] *= _spells[_active_spell];
+            _spells.RemoveAt(_active_spell);
             _active_spell = -1;
             DisplaySpells();
         }
@@ -42,19 +42,19 @@ public class SpellManager : MonoBehaviour {
 
     void DisplaySpells()
     {
-        foreach (GameObject button in buttons)
+        foreach (GameObject button in _buttons)
         {
             GameObject.Destroy(button);
         }
-        buttons.Clear();
+        _buttons.Clear();
 
-        foreach (Matrix4x4 spell in spells)
+        foreach (Matrix4x4 spell in _spells)
         {
-            int button_no = buttons.Count;
+            int button_no = _buttons.Count;
 
             Transform button_transform = (Transform) Instantiate(_spell_button_prefab, Vector3.zero, Quaternion.identity);
             button_transform.SetParent(transform, false);
-            buttons.Add(button_transform.gameObject);
+            _buttons.Add(button_transform.gameObject);
 
             Button button = button_transform.GetComponent<Button>();
             button.onClick.AddListener(() => { SpellClicked( button_no); });
@@ -79,9 +79,17 @@ public class SpellManager : MonoBehaviour {
 
     public Matrix4x4 getSpell()
     {
+        Matrix4x4 spell;
         if (_active_spell == -1)
-            return Matrix4x4.identity;
+            spell= Matrix4x4.identity;
         else
-            return spells[_active_spell];
+        {
+            spell = _spells[_active_spell];
+
+            _spells.RemoveAt(_active_spell);
+            _active_spell = -1;
+            DisplaySpells();
+        }
+        return spell;
     }
 }
