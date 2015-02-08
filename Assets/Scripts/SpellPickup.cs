@@ -26,7 +26,17 @@ public class SpellPickup : MonoBehaviour {
         if (collider.gameObject.tag == "Player")
         {
             _spell_manager.AddSpell(Matrix4x4.TRS(_translation, Quaternion.Euler(_rotation), _scaling));
-            GameObject.Destroy(this.gameObject);
+			StartCoroutine(DestroyAndPlaySound());
         }
     }
+
+	IEnumerator DestroyAndPlaySound() {
+		this.collider.enabled = false;
+		this.audio.Play ();
+		for (int i = 0; i < 30; i++) {
+			this.transform.localScale *= 0.1f;
+			yield return null;
+		}
+		GameObject.Destroy(this.gameObject);
+	}
 }

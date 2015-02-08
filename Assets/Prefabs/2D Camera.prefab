@@ -250,6 +250,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 484820}
   - 212: {fileID: 21284814}
+  - 111: {fileID: 11120844}
   m_Layer: 8
   m_Name: Sun
   m_TagString: Untagged
@@ -532,6 +533,21 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184816}
   m_Enabled: 1
+--- !u!111 &11120844
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 184820}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 67c055afb52fe1b4bb66b732568807b8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 67c055afb52fe1b4bb66b732568807b8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!111 &11184790
 Animation:
   m_ObjectHideFlags: 1
