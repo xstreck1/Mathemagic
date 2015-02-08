@@ -10,13 +10,19 @@ public class CharacterController : MonoBehaviour
     public float _JUMP_FORCE = 15f;
 	private bool _jump = false;
 
+	[SerializeField]
+	private AudioClip footSound;
+	[SerializeField]
+	private AudioClip jumpSound;
+	[SerializeField]
+	private float _footStepTime = 0.5f;
+	private float _nextFootStepTime = 0f;
+
 	private Locomotion2D locomotion;
 
     bool IsGrounded()
     {
-        return Physics.Raycast (transform.position, -Vector3.up, _dist_to_ground + 0.1f) ||
-			Physics.Raycast (transform.position, new Vector3 (-0.05f, -1f, 0f), _dist_to_ground + 0.2f) ||
-				Physics.Raycast (transform.position, new Vector3 (0.05f, -1f, 0f), _dist_to_ground + 0.2f);
+        return Physics.Raycast (transform.position, -Vector3.up, _dist_to_ground + 0.1f);
     }
 
     // Use this for initialization
@@ -72,12 +78,19 @@ public class CharacterController : MonoBehaviour
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE, ForceMode.VelocityChange);
 			_jump = true;
         }
+
 		if (_jump) {
 			locomotion.Update (true, rigidbody.velocity.magnitude);
+			this.audio.PlayOneShot(jumpSound);
 			_jump = false;
 		} else {
+			if (rigidbody.velocity.magnitude > 0.1f && IsGrounded() && Time.time >= _nextFootStepTime) {
+				this.audio.PlayOneShot(footSound);
+				_nextFootStepTime = Time.time + _footStepTime;
+			}
 			locomotion.Update (false, rigidbody.velocity.magnitude);
 		}
+
 		if (rigidbody.velocity.x >= 0f && !Input.GetKey (KeyCode.A)) {
 			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
 		} else if (Input.GetKey (KeyCode.A) || rigidbody.velocity.x <= 0.2f) {
