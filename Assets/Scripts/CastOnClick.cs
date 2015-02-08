@@ -8,6 +8,7 @@ public class CastOnClick : MonoBehaviour
 
     ObjectCollision _object_collision;
     SpellManager _spell_manager;
+	ParticleSystem _particles;
 
     bool _colided = false;
 
@@ -16,6 +17,7 @@ public class CastOnClick : MonoBehaviour
     {
         _spell_manager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
         _object_collision = GetComponent<ObjectCollision>();
+		_particles = GetComponentInChildren<ParticleSystem> ();
     }
 
     // Update is called once per frame
@@ -72,6 +74,7 @@ public class CastOnClick : MonoBehaviour
     IEnumerator ApplyMatrix(Matrix4x4 spell)
     {
         _casting = true;
+		_particles.emissionRate = 30f;
         Rigidbody rigidbody = this.gameObject.AddComponent<Rigidbody>();
         rigidbody.useGravity = false;
 
@@ -118,6 +121,8 @@ public class CastOnClick : MonoBehaviour
             transform.localScale = Vector3.Lerp(old_scale, new_scale, progress);
             transform.up = Vector3.Slerp(old_up, new_up, progress);
         }
+
+		_particles.emissionRate = 0f;
 
         Destroy(rigidbody);
         _casting = false;
