@@ -11719,7 +11719,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 126180, guid: 9c7a782e1a7a94e4799546aff73bb72a, type: 2}
       propertyPath: m_Name
-      value: CombinationHelp
+      value: FinishText
       objectReference: {fileID: 0}
     - target: {fileID: 11426178, guid: 9c7a782e1a7a94e4799546aff73bb72a, type: 2}
       propertyPath: m_Text
@@ -30846,7 +30846,7 @@ GameObject:
   - 222: {fileID: 917095679}
   - 114: {fileID: 917095678}
   m_Layer: 5
-  m_Name: CombinationHelp
+  m_Name: FinishText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36689,7 +36689,7 @@ Prefab:
       objectReference: {fileID: 917095677}
     - target: {fileID: 135424, guid: e41295b722018c641b7a9e8c3542d2d1, type: 2}
       propertyPath: m_Name
-      value: CombinationPickup
+      value: FinishPickup
       objectReference: {fileID: 0}
     - target: {fileID: 135424, guid: e41295b722018c641b7a9e8c3542d2d1, type: 2}
       propertyPath: m_IsActive
@@ -36713,7 +36713,7 @@ GameObject:
   - 23: {fileID: 1198935560}
   - 114: {fileID: 1198935564}
   m_Layer: 0
-  m_Name: CombinationPickup
+  m_Name: FinishPickup
   m_TagString: Untagged
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
