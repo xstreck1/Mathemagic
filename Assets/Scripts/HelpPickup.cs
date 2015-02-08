@@ -15,11 +15,11 @@ public class HelpPickup : MonoBehaviour {
 	void Update () {
         if (_help_active)
             Debug.Log("update called");
-        if (Input.GetMouseButtonDown(0) && _help_active)
+        if (Input.GetMouseButtonDown(0) && help_text.gameObject.activeSelf)
         {
             _help_active = false ;
             help_text.gameObject.SetActive(false);
-            GameObject.Destroy(gameObject);
+            GameObject.Destroy(this.gameObject);
         }
 	}
 
