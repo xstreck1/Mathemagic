@@ -8,7 +8,7 @@ public class SpellPickup : MonoBehaviour {
     public Vector3 _rotation = Vector3.zero;
     public Vector3 _scaling = Vector3.one;
 
-
+	public AudioClip[] _pickupSounds;
     SpellManager _spell_manager;
 
     // Use this for initialization
@@ -32,7 +32,7 @@ public class SpellPickup : MonoBehaviour {
 
 	IEnumerator DestroyAndPlaySound() {
 		this.collider.enabled = false;
-		this.audio.Play ();
+		this.audio.PlayOneShot (_pickupSounds [UnityEngine.Random.Range (0, _pickupSounds.Length)]);
 		for (int i = 0; i < 30; i++) {
 			this.transform.localScale *= 0.1f;
 			yield return null;

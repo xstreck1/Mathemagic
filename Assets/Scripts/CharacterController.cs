@@ -11,9 +11,9 @@ public class CharacterController : MonoBehaviour
 	private bool _jump = false;
 
 	[SerializeField]
-	private AudioClip footSound;
+	private AudioClip[] footSound;
 	[SerializeField]
-	private AudioClip jumpSound;
+	private AudioClip[] jumpSound;
 	[SerializeField]
 	private float _footStepTime = 0.5f;
 	private float _nextFootStepTime = 0f;
@@ -81,11 +81,11 @@ public class CharacterController : MonoBehaviour
 
 		if (_jump) {
 			locomotion.Update (true, rigidbody.velocity.magnitude);
-			this.audio.PlayOneShot(jumpSound);
+			this.audio.PlayOneShot(jumpSound[UnityEngine.Random.Range(0, jumpSound.Length)]);
 			_jump = false;
 		} else {
 			if (rigidbody.velocity.magnitude > 0.1f && IsGrounded() && Time.time >= _nextFootStepTime) {
-				this.audio.PlayOneShot(footSound);
+				this.audio.PlayOneShot(footSound[UnityEngine.Random.Range(0, footSound.Length)]);
 				_nextFootStepTime = Time.time + _footStepTime;
 			}
 			locomotion.Update (false, rigidbody.velocity.magnitude);

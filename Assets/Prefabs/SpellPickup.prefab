@@ -263,6 +263,14 @@ MonoBehaviour:
   _translation: {x: 5, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   _scaling: {x: 1, y: 1, z: 1}
+  _pickupSounds:
+  - {fileID: 8300000, guid: 2b928f293604af34ebe5a28a1a503972, type: 3}
+  - {fileID: 8300000, guid: 49d503166220c044a815c2fc08f84fa8, type: 3}
+  - {fileID: 8300000, guid: e708768c2e3b44243bfbc531b1c458a9, type: 3}
+  - {fileID: 8300000, guid: 0ee64a9ea27dc494da82889e070cd37f, type: 3}
+  - {fileID: 8300000, guid: 51b32294ffe39ca48850d8424d21b45f, type: 3}
+  - {fileID: 8300000, guid: 0fb23551152ad714bbc5611baab596d5, type: 3}
+  - {fileID: 8300000, guid: 07f251a27e6f28e439e36e029f22e118, type: 3}
 --- !u!198 &19866016
 ParticleSystem:
   m_ObjectHideFlags: 1

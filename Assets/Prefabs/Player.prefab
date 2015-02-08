@@ -904,8 +904,29 @@ MonoBehaviour:
   _MOVE_FORCE: 750
   _MAX_SPEED: 5
   _JUMP_FORCE: 15
-  footSound: {fileID: 8300000, guid: 3172a75f5b09c3d448bca6dc432840dd, type: 3}
-  jumpSound: {fileID: 8300000, guid: 15c2c0b1aaa544144aa254f54f06ff6b, type: 3}
+  footSound:
+  - {fileID: 8300000, guid: 6c99e4a6be592bb4fa23e89327677690, type: 3}
+  - {fileID: 8300000, guid: c521d13be3dcb8f47b83011c201523b2, type: 3}
+  - {fileID: 8300000, guid: 657cd921069c6e64f9606effcfd550b6, type: 3}
+  - {fileID: 8300000, guid: 4255988b25d757d4fa46589203cf36cf, type: 3}
+  - {fileID: 8300000, guid: fb18b4d68b0c9354fa6d06512a205713, type: 3}
+  - {fileID: 8300000, guid: d9c5cbf94fc030243a861af7a529601f, type: 3}
+  - {fileID: 8300000, guid: 2da35351be9f8af439a0ba79a47624f9, type: 3}
+  - {fileID: 8300000, guid: 3172a75f5b09c3d448bca6dc432840dd, type: 3}
+  - {fileID: 8300000, guid: e88d668402c1bc547a765fb64d1305e1, type: 3}
+  jumpSound:
+  - {fileID: 8300000, guid: 519d3528e2a617b419f0c5b8e827424c, type: 3}
+  - {fileID: 8300000, guid: 15c2c0b1aaa544144aa254f54f06ff6b, type: 3}
+  - {fileID: 8300000, guid: 18ea8f8bff5a18b45bdef35b42cc9335, type: 3}
+  - {fileID: 8300000, guid: 0374c80fd69a5eb4f8143a611f3dcd88, type: 3}
+  - {fileID: 8300000, guid: 4e92dc3d1aac42b4b894828078098d11, type: 3}
+  - {fileID: 8300000, guid: 0e1818102206b124f9a4cfa95a9da728, type: 3}
+  - {fileID: 8300000, guid: 426cdde110b12a3458435299cb9cacd8, type: 3}
+  - {fileID: 8300000, guid: e1461a4f3a4c7f04d98067f741fe5f30, type: 3}
+  - {fileID: 8300000, guid: 637d04fddb809864cadc09ad0e475542, type: 3}
+  - {fileID: 8300000, guid: f708b8d930af8d84a9a733ec9524654d, type: 3}
+  - {fileID: 8300000, guid: 639104d40df8af2499eab60024dcfb79, type: 3}
+  - {fileID: 8300000, guid: 445cda8563fc4334298810d869fd5395, type: 3}
   _footStepTime: .5
 --- !u!136 &13653038
 CapsuleCollider:
