@@ -10,7 +10,7 @@ public class SpellManager : MonoBehaviour {
     List<Matrix4x4> _spells = new List<Matrix4x4>();
     List<GameObject> _buttons = new List<GameObject>();
 
-    Color _active_button_color = Color.black;
+    public Color _active_button_color = Color.black;
     Color _inactive_button_color; // Set via the prafab
 
     // Use this for initialization

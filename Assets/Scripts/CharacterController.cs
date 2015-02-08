@@ -17,8 +17,10 @@ public class CharacterController : MonoBehaviour
 	[SerializeField]
 	private float _footStepTime = 0.5f;
 	private float _nextFootStepTime = 0f;
+	private ParticleSystem particles;
 
 	private static Locomotion2D locomotion;
+	private static CharacterController instance;
 
     bool IsGrounded()
     {
@@ -28,7 +30,9 @@ public class CharacterController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		instance = this;
 		locomotion = new Locomotion2D (this.GetComponent<Animator> ());
+		particles = GetComponentInChildren<ParticleSystem> ();
     }
 
     void FixedUpdate()
@@ -102,5 +106,12 @@ public class CharacterController : MonoBehaviour
 
 	public static void CastSpell() {
 		locomotion.CastSpell ();
+		instance.StartCoroutine (instance.spawnParticles ());
+	}
+
+	private IEnumerator spawnParticles() {
+		particles.emissionRate = 10f;
+		yield return new WaitForSeconds (1f);
+		particles.emissionRate = 0f;
 	}
 }
