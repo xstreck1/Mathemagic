@@ -42,7 +42,7 @@ public class ObjectCollision : MonoBehaviour
         ObjectCollision other = collision.gameObject.GetComponent<ObjectCollision>();
         if (other != null && other._toughness >= _toughness)
         {
-            StartCoroutine(SmashThis());
+            // StartCoroutine(SmashThis());
         }
     }
 

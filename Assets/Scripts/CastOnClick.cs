@@ -9,6 +9,8 @@ public class CastOnClick : MonoBehaviour
     ObjectCollision _object_collision;
     SpellManager _spell_manager;
 
+    bool _colided = false;
+
     // Use this for initialization
     void Start()
     {
@@ -63,11 +65,16 @@ public class CastOnClick : MonoBehaviour
             Matrix4x4.TRS(-transform.position, Quaternion.identity, Vector3.one);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        _colided = true;
+    }
+
     IEnumerator ApplyMatrix(Matrix4x4 spell)
     {
         _casting = true;
         Rigidbody rigidbody = this.gameObject.AddComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
 
         spell = putToOrigin(spell);
 
@@ -87,7 +94,8 @@ public class CastOnClick : MonoBehaviour
         Vector3 new_scale = new Vector3(Vector3.Distance(new_position, scale_pos_x), Vector3.Distance(new_position, scale_pos_y), Vector3.Distance(new_position, scale_pos_z));
 
         // Lerp in the coroutine for the CAST TIME
-        for (float time = 0; time < _CAST_TIME && !_object_collision.isDestroying(); time += Time.deltaTime)
+        float time;
+        for (time = 0; time < _CAST_TIME && !_colided; time += Time.deltaTime)
         {
             float progress = time / _CAST_TIME;
             transform.position = Vector3.Lerp(old_position, new_position, progress);
@@ -97,14 +105,21 @@ public class CastOnClick : MonoBehaviour
         }
 
         // Adjust after the coroutine has finished
-        if (!_object_collision.isDestroying())
+        if (!_colided)
         {
             transform.position = Vector3.Lerp(old_position, new_position, 1f);
             transform.localScale = Vector3.Lerp(old_scale, new_scale, 1f);
             transform.up = Vector3.Slerp(old_up, new_up, 1f);
+        } else
+        {
+            float progress = (time - 2* Time.deltaTime) / _CAST_TIME; 
+            transform.position = Vector3.Lerp(old_position, new_position, progress);
+            transform.localScale = Vector3.Lerp(old_scale, new_scale, progress);
+            transform.up = Vector3.Slerp(old_up, new_up, progress);
         }
 
         Destroy(rigidbody);
         _casting = false;
+        _colided = false;
     }
 }

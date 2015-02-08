@@ -15,4 +15,11 @@ public class Scene : MonoBehaviour {
             Application.LoadLevel(Application.loadedLevelName);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            Application.LoadLevel(Application.loadedLevelName);
+
+    }
 }
