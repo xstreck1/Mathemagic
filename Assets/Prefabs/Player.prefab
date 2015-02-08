@@ -32,6 +32,7 @@ GameObject:
   - 65: {fileID: 6543950}
   - 82: {fileID: 8243950}
   - 65: {fileID: 6537098}
+  - 65: {fileID: 6564186}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -464,7 +465,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.8599997, y: -4.22000027, z: 0}
+  m_LocalPosition: {x: -16.2999992, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 478376}
@@ -860,6 +861,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .25, y: 2, z: .25}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6564186
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: .25, y: 2, z: .25}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8243950
 AudioSource:
   m_ObjectHideFlags: 1
@@ -970,6 +983,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f708b8d930af8d84a9a733ec9524654d, type: 3}
   - {fileID: 8300000, guid: 639104d40df8af2499eab60024dcfb79, type: 3}
   - {fileID: 8300000, guid: 445cda8563fc4334298810d869fd5395, type: 3}
+  magicSounds:
+  - {fileID: 8300000, guid: 2c66464d064951d479acac6c95f4ab0c, type: 3}
+  - {fileID: 8300000, guid: 161471d8238c5e045876ef3889483691, type: 3}
+  - {fileID: 8300000, guid: 744e14bc1bd239f4bb6738f4ba08f8e9, type: 3}
+  - {fileID: 8300000, guid: dd61edabe4969984ea66a6316334994e, type: 3}
+  - {fileID: 8300000, guid: e2788f754ffaa2a43b55e4f98ea2fac8, type: 3}
+  - {fileID: 8300000, guid: 0c304c14cd9f28a41b2c2fd25a68706d, type: 3}
   _footStepTime: .5
 --- !u!136 &13653038
 CapsuleCollider:

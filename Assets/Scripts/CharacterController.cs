@@ -15,6 +15,8 @@ public class CharacterController : MonoBehaviour
 	[SerializeField]
 	private AudioClip[] jumpSound;
 	[SerializeField]
+	private AudioClip[] magicSounds;
+	[SerializeField]
 	private float _footStepTime = 0.5f;
 	private float _nextFootStepTime = 0f;
 	private ParticleSystem particles;
@@ -110,6 +112,7 @@ public class CharacterController : MonoBehaviour
 	}
 
 	private IEnumerator spawnParticles() {
+		this.audio.PlayOneShot(magicSounds[UnityEngine.Random.Range(0, magicSounds.Length)]);
 		particles.emissionRate = 10f;
 		yield return new WaitForSeconds (1f);
 		particles.emissionRate = 0f;
