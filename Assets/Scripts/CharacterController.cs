@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
     float _dist_to_ground = 1f;
     public float _MOVE_FORCE = 750f;
     public float _MAX_SPEED = 5f;
-    public float _JUMP_FORCE = 750f;
+    public float _JUMP_FORCE = 15f;
 	private bool _jump = false;
 
 	private Locomotion2D locomotion;
@@ -22,6 +22,11 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
 		locomotion = new Locomotion2D (this.GetComponent<Animator> ());
+    }
+
+    void FixedUpdate()
+    {
+
     }
 
     // Update is called once per frame
@@ -50,7 +55,7 @@ public class CharacterController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
         {
             transform.position += Vector3.up * 0.25f;
-            rigidbody.AddForce(Vector3.up * _JUMP_FORCE);
+            rigidbody.AddForce(Vector3.up * _JUMP_FORCE, ForceMode.VelocityChange);
 			_jump = true;
         }
 		if (_jump) {

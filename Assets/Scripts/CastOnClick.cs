@@ -67,7 +67,7 @@ public class CastOnClick : MonoBehaviour
     {
         _casting = true;
         Rigidbody rigidbody = this.gameObject.AddComponent<Rigidbody>();
-        rigidbody.useGravity = false;
+        rigidbody.isKinematic = true;
 
         spell = putToOrigin(spell);
 
