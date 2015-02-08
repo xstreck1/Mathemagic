@@ -18,7 +18,7 @@ public class CharacterController : MonoBehaviour
 	private float _footStepTime = 0.5f;
 	private float _nextFootStepTime = 0f;
 
-	private Locomotion2D locomotion;
+	private static Locomotion2D locomotion;
 
     bool IsGrounded()
     {
@@ -99,4 +99,8 @@ public class CharacterController : MonoBehaviour
 			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
 		}
     }
+
+	public static void CastSpell() {
+		locomotion.CastSpell ();
+	}
 }

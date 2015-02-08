@@ -75,6 +75,8 @@ public class CastOnClick : MonoBehaviour
         Rigidbody rigidbody = this.gameObject.AddComponent<Rigidbody>();
         rigidbody.useGravity = false;
 
+		CharacterController.CastSpell ();
+
         spell = putToOrigin(spell);
 
         // Apply rotation
