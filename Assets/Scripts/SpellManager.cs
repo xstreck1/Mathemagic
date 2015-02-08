@@ -8,7 +8,10 @@ public class SpellManager : MonoBehaviour {
     public Transform _spell_button_prefab;
     int _active_spell = -1;
     List<Matrix4x4> _spells = new List<Matrix4x4>();
-    List<GameObject> _buttons = new List<GameObject>(); 
+    List<GameObject> _buttons = new List<GameObject>();
+
+    Color _active_button_color = Color.black;
+    Color _inactive_button_color; // Set via the prafab
 
     // Use this for initialization
     void Start () {
@@ -20,20 +23,20 @@ public class SpellManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        _inactive_button_color = _spell_button_prefab.GetComponent<Button>().image.color;
+    }
 
     void SpellClicked(int spell_no)
     {
         Debug.Log("spell " + spell_no);
         if (_active_spell == -1)
         {
-            _buttons[spell_no].GetComponent<Button>().image.color = Color.black;
+            _buttons[spell_no].GetComponent<Button>().image.color = _active_button_color;
             _active_spell = spell_no;
         } else if (_active_spell == spell_no)
         {
             _active_spell = -1;
-            _buttons[spell_no].GetComponent<Button>().image.color = Color.white;
+            _buttons[spell_no].GetComponent<Button>().image.color = _inactive_button_color;
         } else
         {
             _spells[spell_no] *= _spells[_active_spell];
@@ -69,7 +72,7 @@ public class SpellManager : MonoBehaviour {
             button.name = "Spell button " + button_no;
 
             if (_active_spell == button_no)
-                _buttons[button_no].GetComponent<Button>().image.color = Color.black;
+                _buttons[button_no].GetComponent<Button>().image.color = _active_button_color;
 
             button_transform.GetComponentInChildren<Text>().text = GetSpellText(spell);
         }
