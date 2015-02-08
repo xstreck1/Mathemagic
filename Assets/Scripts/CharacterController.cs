@@ -36,13 +36,13 @@ public class CharacterController : MonoBehaviour
         // If position is fixed
         if((Convert.ToInt32(rigidbody.constraints) & Convert.ToInt32(RigidbodyConstraints.FreezePosition)) != 0)
         {
-            if (!CastOnClick.IsCasting())
+            if (!CastOnClick.IsCasting() && !HelpPickup.IsHelpActive())
             {
                 rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             }
         } else
         {
-            if (CastOnClick.IsCasting())
+            if (CastOnClick.IsCasting() || HelpPickup.IsHelpActive())
             {
                 rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             }
