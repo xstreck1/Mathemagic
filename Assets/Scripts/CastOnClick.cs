@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CastOnClick : MonoBehaviour
 {
-    bool _casting = false; ///< Set to true for the period of spell being active
+    static bool _casting = false; ///< Set to true for the period of spell being active
     float _CAST_TIME = 1f;
 
     ObjectCollision _object_collision;
@@ -27,19 +27,18 @@ public class CastOnClick : MonoBehaviour
     void OnMouseDown()
     {
         if (!_casting) {
-            Cast(_spell_manager.GetSpell());
-            Debug.Log("spell casted on " + this.name);
+            Matrix4x4 spell = _spell_manager.GetSpell();
+            if (spell != Matrix4x4.identity)
+            {
+                StartCoroutine(ApplyMatrix(spell));
+                Debug.Log("spell " + spell.ToString() + " casted on " + this.name);
+            }
         }
     }
 
-    public bool IsCasting()
+    public static bool IsCasting()
     {
         return _casting;
-    }
-
-    void Cast(Matrix4x4 spell)
-    {
-        StartCoroutine(ApplyMatrix(spell));
     }
 
     float GetAngle()
