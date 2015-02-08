@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
@@ -26,7 +27,20 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        // If position is fixed
+        if((Convert.ToInt32(rigidbody.constraints) & Convert.ToInt32(RigidbodyConstraints.FreezePosition)) != 0)
+        {
+            if (!CastOnClick.IsCasting())
+            {
+                rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+        } else
+        {
+            if (CastOnClick.IsCasting())
+            {
+                rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            }
+        }
     }
 
     // Update is called once per frame
