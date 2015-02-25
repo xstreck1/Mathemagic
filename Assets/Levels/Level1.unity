@@ -4103,7 +4103,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 300, y: 125}
+  m_SizeDelta: {x: 300, y: 160}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &331584047
 MonoBehaviour:
@@ -14424,7 +14424,10 @@ MonoBehaviour:
 
     This one is a spell of scaling. It changes size of things.
 
-    Select it and cast it on the block in front of you.
+    ...
+
+    Select it in the top left corner (LMB) and then cast it on the rock block to the
+    right of you (LMB).
 
 '
 --- !u!222 &734380831
@@ -27913,7 +27916,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22426180, guid: 9c7a782e1a7a94e4799546aff73bb72a, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 125
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 22426180, guid: 9c7a782e1a7a94e4799546aff73bb72a, type: 2}
       propertyPath: m_AnchorMin.x
@@ -27952,7 +27955,10 @@ Prefab:
 
         This one is a spell of scaling. It changes size of things.
 
-        Select it and cast it on the block in front of you.
+        ...
+
+        Select it in the top left corner (LMB) and then cast it on the rock block
+        to the right of you (LMB).
 
 '
       objectReference: {fileID: 0}

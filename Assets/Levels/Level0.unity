@@ -20097,7 +20097,7 @@ Prefab:
 
         You, however, should worry a lot.
 
-        Run, run for your life!'
+        Press LMB and then run, run for your life!'
       objectReference: {fileID: 0}
     - target: {fileID: 22426178, guid: 9c7a782e1a7a94e4799546aff73bb72a, type: 2}
       propertyPath: m_LocalScale.x
@@ -35902,7 +35902,7 @@ MonoBehaviour:
 
     You, however, should worry a lot.
 
-    Run, run for your life!'
+    Press LMB and then run, run for your life!'
 --- !u!222 &1620768247
 CanvasRenderer:
   m_ObjectHideFlags: 0
