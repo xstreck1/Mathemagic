@@ -83,8 +83,10 @@ public class SpellManager : MonoBehaviour {
         string result = "";
         foreach (int x in Enumerable.Range(0, 4))
         {
+            if (x == 2) continue;
             foreach (int y in Enumerable.Range(0, 4))
             {
+                if (y == 2) continue;
                 result += (mat[x,y] >= 0f ?  " " : "") + mat[x, y].ToString("0.00") + " ";
             }
             result = result.Remove(result.Length -1) + "\n";

@@ -37,36 +37,18 @@ public class CharacterController : MonoBehaviour
 		particles = GetComponentInChildren<ParticleSystem> ();
     }
 
-    void FixedUpdate()
-    {
-        // If position is fixed
-        if((Convert.ToInt32(rigidbody.constraints) & Convert.ToInt32(RigidbodyConstraints.FreezePosition)) != 0)
-        {
-            if (!CastOnClick.IsCasting() && !HelpPickup.IsHelpActive())
-            {
-                rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            }
-        } else
-        {
-            if (CastOnClick.IsCasting() || HelpPickup.IsHelpActive())
-            {
-                rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            }
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
         // Debug.Log("velocity " + rigidbody.velocity.x);
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !CastOnClick.IsCasting())
         {
             if (rigidbody.velocity.x < _MAX_SPEED)
             {
                 rigidbody.AddForce(Vector3.right * _MOVE_FORCE * Time.deltaTime);
             }
         }
-        else if(Input.GetKey(KeyCode.A))
+        else if(Input.GetKey(KeyCode.A) && !CastOnClick.IsCasting())
         {
             if (rigidbody.velocity.x > -_MAX_SPEED)
             {
@@ -78,7 +60,7 @@ public class CharacterController : MonoBehaviour
 			Vector3 oppositeForce = new Vector3(-rigidbody.velocity.x, 0f, 0f);
 			rigidbody.AddForce(oppositeForce * _MOVE_FORCE * 0.5f * Time.deltaTime);
         }
-        if (Input.GetKeyDown(KeyCode.W) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.W) && IsGrounded() && !CastOnClick.IsCasting())
         {
             transform.position += Vector3.up * 0.25f;
             rigidbody.AddForce(Vector3.up * _JUMP_FORCE, ForceMode.VelocityChange);
