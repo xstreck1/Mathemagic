@@ -79,13 +79,21 @@ public class CharacterController : MonoBehaviour
 			locomotion.Update (false, rigidbody.velocity.magnitude);
 		}
 
-		if (rigidbody.velocity.x >= 0f && !Input.GetKey (KeyCode.A)) {
-			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
-		} else if (Input.GetKey (KeyCode.A) || rigidbody.velocity.x <= 0.2f) {
-			transform.rotation = Quaternion.AngleAxis (-90f, Vector3.up);
-		} else {
-			transform.rotation = Quaternion.AngleAxis (90f, Vector3.up);
-		}
+        if (!CastOnClick.IsCasting())
+        {
+            if (rigidbody.velocity.x >= 0f && !Input.GetKey(KeyCode.A))
+            {
+                transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
+            }
+            else if (Input.GetKey(KeyCode.A) || rigidbody.velocity.x <= 0.2f)
+            {
+                transform.rotation = Quaternion.AngleAxis(-90f, Vector3.up);
+            }
+            else
+            {
+                transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
+            }
+        }
     }
 
 	public static void CastSpell() {

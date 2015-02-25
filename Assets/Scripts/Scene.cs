@@ -14,6 +14,10 @@ public class Scene : MonoBehaviour {
         {
             Application.LoadLevel(Application.loadedLevelName);
         }
+        if (Input.GetKey(KeyCode.N))
+        {
+            Application.LoadLevel("Level0");
+        }
     }
 
     void OnCollisionEnter(Collision collision)
