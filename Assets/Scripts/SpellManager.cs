@@ -39,7 +39,7 @@ public class SpellManager : MonoBehaviour {
             _buttons[spell_no].GetComponent<Button>().image.color = _inactive_button_color;
         } else
         {
-            _spells[spell_no] *= _spells[_active_spell];
+            _spells[spell_no] = _spells[spell_no] * _spells[_active_spell];
             _spells.RemoveAt(_active_spell);
 
             if (_active_spell > spell_no)

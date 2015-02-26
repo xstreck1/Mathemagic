@@ -5,6 +5,7 @@ public class CastOnClick : MonoBehaviour
 {
     static bool _casting = false; ///< Set to true for the period of spell being active
     float _CAST_TIME = 1f;
+    float _time = 0;
 
     ObjectCollision _object_collision;
     SpellManager _spell_manager;
@@ -23,6 +24,12 @@ public class CastOnClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_casting && _time > 0)
+        {
+            _time -= Time.deltaTime;
+            if (_time <= 0)
+                _casting = false;
+        }
     }
 
     // 
@@ -73,6 +80,7 @@ public class CastOnClick : MonoBehaviour
 
     IEnumerator ApplyMatrix(Matrix4x4 spell)
     {
+        _time = _CAST_TIME;
         _casting = true;
 		_particles.emissionRate = 30f;
         Rigidbody rigidbody = this.gameObject.AddComponent<Rigidbody>();
